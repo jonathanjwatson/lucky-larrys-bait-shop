@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
 import About from "./containers/About/About";
 import Admin from "./containers/Admin/Admin";
 import Contact from "./containers/Contact/Contact";
@@ -11,6 +12,7 @@ function App() {
   return (
     <div>
       <Router>
+        <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
