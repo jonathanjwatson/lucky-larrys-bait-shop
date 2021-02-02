@@ -25,11 +25,15 @@ connection.on("error", (err) => {
   console.log("Mongoose connection error: ", err);
 });
 
+const ProductsController = require("./controllers/productsController");
+
 app.use(express.static("client/build"));
 
 app.get("/api/config", (req, res) => {
   res.json({ success: true });
 });
+
+app.use("/api/products", ProductsController);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));
