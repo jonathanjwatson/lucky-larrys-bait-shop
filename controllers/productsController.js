@@ -8,8 +8,17 @@ router.get("/", (req, res) => {
       res.json(products);
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).end();
     });
+});
+
+router.post("/", (req, res) => {
+  console.log(req.body);
+  Product.create(req.body).then((newProduct) => {
+    console.log(newProduct);
+    res.json(newProduct);
+  });
 });
 
 module.exports = router;
