@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 
 const Admin = () => {
   // 1. hard code the render
@@ -49,6 +52,7 @@ const Admin = () => {
             </thead>
 
             <tbody>
+              {/* TODO: Move this out to a separate component */}
               {products.map(
                 ({
                   _id,
@@ -64,12 +68,29 @@ const Admin = () => {
                     <td>{title}</td>
                     <td>{description}</td>
                     <td>{price}</td>
-                    <td>{imageURL}</td>
+                    <td>
+                      <img
+                        src={imageURL}
+                        alt={title}
+                        style={{ height: "3em" }}
+                      ></img>
+                    </td>
                     <td>{category}</td>
                     <td>{quantity}</td>
-                    <td>{featured}?</td>
-                    <td>EDIT BUTTON?</td>
-                    <td>DELETE BUTTON?</td>
+                    <td>
+                      {/* TODO: Toggle feature status via PUT request when clicked. */}
+                      <FontAwesomeIcon
+                        icon={featured ? faStar : faStarOutline}
+                      />
+                    </td>
+                    <td>
+                      {/* TODO: Open an edit form with values pre-populated */}
+                      <FontAwesomeIcon icon={faEdit} />
+                    </td>
+                    <td>
+                      {/* TODO: Make a DELETE request when clicked. */}
+                      <FontAwesomeIcon icon={faTrash} />
+                    </td>
                   </tr>
                 )
               )}

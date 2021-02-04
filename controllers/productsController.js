@@ -21,4 +21,18 @@ router.post("/", (req, res) => {
   });
 });
 
+router.put("/:id", (req, res) => {
+  Product.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
+    (updatedObject) => {
+      res.json(updatedObject);
+    }
+  );
+});
+
+router.delete("/:id", (req, res) => {
+  Product.findByIdAndDelete(req.params.id).then((result) => {
+    res.json(result);
+  });
+});
+
 module.exports = router;
