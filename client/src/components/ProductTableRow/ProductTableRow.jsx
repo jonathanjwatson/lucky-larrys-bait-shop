@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faStar } from "@fortawesome/free-solid-svg-icons";
@@ -57,8 +58,9 @@ const ProductTableRow = ({
         />
       </td>
       <td>
-        {/* TODO: Open an edit form with values pre-populated */}
-        <FontAwesomeIcon icon={faEdit} />
+        <Link to={`/admin/${_id}`}>
+          <FontAwesomeIcon icon={faEdit} />
+        </Link>
       </td>
       <td>
         <FontAwesomeIcon

@@ -13,6 +13,17 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  Product.findById(req.params.id)
+    .then((foundProduct) => {
+      res.json(foundProduct);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).end();
+    });
+});
+
 router.post("/", (req, res) => {
   console.log(req.body);
   Product.create(req.body).then((newProduct) => {

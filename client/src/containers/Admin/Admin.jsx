@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductTableRow from "../../components/ProductTableRow/ProductTableRow";
+
 const Admin = () => {
   // 1. hard code the render
   // 2. move the values to this.state
@@ -53,7 +54,6 @@ const Admin = () => {
             </thead>
 
             <tbody>
-              {/* TODO: Move this out to a separate component */}
               {products.map((product) => (
                 <ProductTableRow
                   key={product._id}

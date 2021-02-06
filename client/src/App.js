@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar/NavBar";
 import About from "./containers/About/About";
 import Admin from "./containers/Admin/Admin";
 import Contact from "./containers/Contact/Contact";
+import EditProduct from "./containers/EditProduct/EditProduct";
 import Home from "./containers/Home/Home";
 import NewProduct from "./containers/NewProduct/NewProduct";
 import ProductDetail from "./containers/ProductDetail/ProductDetail";
@@ -22,6 +23,7 @@ function App() {
           <Route path="/products/:id" component={ProductDetail} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/new-product" component={NewProduct} />
+          <Route exact path="/admin/:id" component={EditProduct} />
         </Switch>
       </Router>
     </div>

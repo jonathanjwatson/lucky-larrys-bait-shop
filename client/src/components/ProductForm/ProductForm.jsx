@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const ProductForm = ({ handleFormSubmit }) => {
+const ProductForm = ({ buttonText, handleFormSubmit }) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -9,12 +11,16 @@ const ProductForm = ({ handleFormSubmit }) => {
   const [quantity, setQuantity] = useState("");
   const [featured, setFeatured] = useState(false);
 
-  return (
-    <>
-      <form
-        className="col s12"
-        onSubmit={(e) => {
-          handleFormSubmit(e, {
+  const { id } = useParams();
+
+  useEffect(() => {
+    console.log(id);
+    if (id) {
+      axios
+        .get(`/api/products/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          const {
             title,
             price,
             description,
@@ -22,7 +28,39 @@ const ProductForm = ({ handleFormSubmit }) => {
             category,
             quantity,
             featured,
-          });
+          } = response.data;
+          setTitle(title);
+          setPrice(price);
+          setDescription(description);
+          setImageURL(imageURL);
+          setCategory(category);
+          setQuantity(quantity);
+          setFeatured(featured);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [id]);
+
+  return (
+    <>
+      <form
+        className="col s12"
+        onSubmit={(e) => {
+          handleFormSubmit(
+            e,
+            {
+              title,
+              price,
+              description,
+              imageURL,
+              category,
+              quantity,
+              featured,
+            },
+            id
+          );
         }}
       >
         <div className="row">
@@ -128,7 +166,7 @@ const ProductForm = ({ handleFormSubmit }) => {
         <div className="row">
           <div className="col s12">
             <button className="waves-effect waves-light btn">
-              Create New Product
+              {buttonText}
             </button>
           </div>
         </div>

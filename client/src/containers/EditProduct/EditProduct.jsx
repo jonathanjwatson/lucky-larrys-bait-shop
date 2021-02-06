@@ -3,13 +3,13 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import ProductForm from "../../components/ProductForm/ProductForm";
 
-const NewProduct = () => {
+const EditProduct = () => {
   const history = useHistory();
 
-  const handleFormSubmit = (e, productData) => {
+  const handleFormSubmit = (e, productData, id) => {
     e.preventDefault();
     axios
-      .post("/api/products", productData)
+      .put(`/api/products/${id}`, productData)
       .then((response) => {
         console.log(response.data);
         history.push("/admin");
@@ -18,7 +18,6 @@ const NewProduct = () => {
         console.log(err);
       });
   };
-
   return (
     <div className="container">
       <div className="row">
@@ -29,11 +28,11 @@ const NewProduct = () => {
       <div className="row">
         <ProductForm
           handleFormSubmit={handleFormSubmit}
-          buttonText="Create New Product"
+          buttonText="Update Product"
         />
       </div>
     </div>
   );
 };
 
-export default NewProduct;
+export default EditProduct;
