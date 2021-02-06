@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash, faStar } from "@fortawesome/free-solid-svg-icons";
-import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
-
+import ProductTableRow from "../../components/ProductTableRow/ProductTableRow";
 const Admin = () => {
   // 1. hard code the render
   // 2. move the values to this.state
@@ -16,6 +13,10 @@ const Admin = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = () => {
     axios
       .get("/api/products")
       .then((response) => {
@@ -25,7 +26,7 @@ const Admin = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
 
   return (
     <div className="container">
@@ -53,47 +54,13 @@ const Admin = () => {
 
             <tbody>
               {/* TODO: Move this out to a separate component */}
-              {products.map(
-                ({
-                  _id,
-                  title,
-                  description,
-                  price,
-                  imageURL,
-                  category,
-                  quantity,
-                  featured,
-                }) => (
-                  <tr key={_id}>
-                    <td>{title}</td>
-                    <td>{description}</td>
-                    <td>{price}</td>
-                    <td>
-                      <img
-                        src={imageURL}
-                        alt={title}
-                        style={{ height: "3em" }}
-                      ></img>
-                    </td>
-                    <td>{category}</td>
-                    <td>{quantity}</td>
-                    <td>
-                      {/* TODO: Toggle feature status via PUT request when clicked. */}
-                      <FontAwesomeIcon
-                        icon={featured ? faStar : faStarOutline}
-                      />
-                    </td>
-                    <td>
-                      {/* TODO: Open an edit form with values pre-populated */}
-                      <FontAwesomeIcon icon={faEdit} />
-                    </td>
-                    <td>
-                      {/* TODO: Make a DELETE request when clicked. */}
-                      <FontAwesomeIcon icon={faTrash} />
-                    </td>
-                  </tr>
-                )
-              )}
+              {products.map((product) => (
+                <ProductTableRow
+                  key={product._id}
+                  {...product}
+                  getProducts={getProducts}
+                />
+              ))}
             </tbody>
           </table>
         </div>
