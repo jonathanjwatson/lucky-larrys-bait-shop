@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from "../../assets/images/LuckyLarrysBaitShop.jpg";
+import Logo from "../../assets/images/LuckyLarrysBaitShop.png";
 
 const Home = () => {
     return (
