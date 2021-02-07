@@ -13,6 +13,14 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/featured", (req, res) => {
+  Product.find({ featured: true })
+    .limit(3)
+    .then((featuredProducts) => {
+      res.json(featuredProducts);
+    });
+});
+
 router.get("/:id", (req, res) => {
   Product.findById(req.params.id)
     .then((foundProduct) => {
