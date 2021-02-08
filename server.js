@@ -35,6 +35,14 @@ app.get("/api/config", (req, res) => {
 
 app.use("/api/products", ProductsController);
 
+// FIXME: Actually check the database for user and match credentials.
+app.post("/api/login", (req, res) => {
+  res.json({
+    message: "Successfully signed in.",
+    token: "banana",
+  });
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));
 });

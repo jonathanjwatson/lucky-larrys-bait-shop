@@ -7,13 +7,16 @@ import Admin from "./containers/Admin/Admin";
 import Contact from "./containers/Contact/Contact";
 import EditProduct from "./containers/EditProduct/EditProduct";
 import Home from "./containers/Home/Home";
+import Login from "./containers/Login/Login";
 import NewProduct from "./containers/NewProduct/NewProduct";
 import ProductDetail from "./containers/ProductDetail/ProductDetail";
 import Products from "./containers/Products/Products";
 import AlertContext from "./utils/alertContext";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [alert, setAlert] = useState({ message: "", type: "" });
+  const [token, setToken] = useState("");
 
   return (
     <div>
@@ -31,7 +34,17 @@ function App() {
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/products" component={Products} />
             <Route path="/products/:id" component={ProductDetail} />
-            <Route exact path="/admin" component={Admin} />
+            <Route
+              exact
+              path="/login"
+              component={(props) => <Login {...props} setToken={setToken} />}
+            />
+            <ProtectedRoute
+              exact
+              path="/admin"
+              component={Admin}
+              token={token}
+            />
             <Route exact path="/admin/new-product" component={NewProduct} />
             <Route exact path="/admin/:id" component={EditProduct} />
           </Switch>
