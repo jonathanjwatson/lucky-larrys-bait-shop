@@ -26,7 +26,7 @@ const Login = ({setToken}) => {
     <div className="container">
       <div className="row">
         <div className="col s12">
-          <h1 className="center-align">Add a New Product</h1>
+          <h1 className="center-align">Welcome! Please login to continue</h1>
         </div>
       </div>
       <div className="row">
