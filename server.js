@@ -26,6 +26,7 @@ connection.on("error", (err) => {
 });
 
 const ProductsController = require("./controllers/productsController");
+const AuthController = require("./controllers/authController");
 
 app.use(express.static("client/build"));
 
@@ -34,14 +35,7 @@ app.get("/api/config", (req, res) => {
 });
 
 app.use("/api/products", ProductsController);
-
-// FIXME: Actually check the database for user and match credentials.
-app.post("/api/login", (req, res) => {
-  res.json({
-    message: "Successfully signed in.",
-    token: "banana",
-  });
-});
+app.use("/api/auth", AuthController);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));

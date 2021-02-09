@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-const Login = ({setToken}) => {
+const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -11,7 +11,7 @@ const Login = ({setToken}) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("/api/login", { email, password })
+      .post("/api/auth/login", { email, password })
       .then((response) => {
         console.log(response.data);
         setToken(response.data.token);
