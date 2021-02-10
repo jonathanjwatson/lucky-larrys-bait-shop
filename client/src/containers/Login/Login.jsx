@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import jwt from "jsonwebtoken";
 
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
@@ -14,8 +15,18 @@ const Login = ({ setToken }) => {
       .post("/api/auth/login", { email, password })
       .then((response) => {
         console.log(response.data);
-        setToken(response.data.token);
-        history.push("/admin");
+        jwt.verify(
+          response.data.token,
+          process.env.REACT_APP_JWT_SIGNATURE,
+          (err, decoded) => {
+            if (err) {
+              console.log(err);
+            } else {
+              setToken(response.data.token);
+              history.push("/admin");
+            }
+          }
+        );
       })
       .catch((err) => {
         console.log(err);
