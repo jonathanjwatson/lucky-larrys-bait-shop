@@ -29,6 +29,7 @@ connection.on("error", (err) => {
 
 const ProductsController = require("./controllers/productsController");
 const AuthController = require("./controllers/authController");
+const SmsController = require("./controllers/smsController");
 
 app.use(express.static("client/build"));
 
@@ -38,6 +39,7 @@ app.get("/api/config", (req, res) => {
 
 app.use("/api/products", ProductsController);
 app.use("/api/auth", AuthController);
+app.use("/api/sms", SmsController);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));

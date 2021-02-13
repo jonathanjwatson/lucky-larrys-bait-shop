@@ -1,8 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const ProductCard = ({ title, price, imageURL, description, _id }) => {
+  const requestPickup = () => {
+    axios
+      .post("/api/sms/order", {
+        phone: "888-888-8888",
+        product: title,
+      })
+      .then((response) => {
+        alert("Lucky Larry's has been contacted about your pickup request!");
+      })
+      .catch((err) => {
+        alert("There was an error requesting your pickup. ");
+      });
+  };
+
   return (
     <div className="col s4">
       <div className="row">
@@ -19,6 +34,12 @@ const ProductCard = ({ title, price, imageURL, description, _id }) => {
             </div>
             <div className="card-action">
               <Link to={`/products/${_id}`}>Learn More</Link>
+              <button
+                className="waves-effect waves-light btn"
+                onClick={requestPickup}
+              >
+                Request Pickup
+              </button>
             </div>
           </div>
         </div>
