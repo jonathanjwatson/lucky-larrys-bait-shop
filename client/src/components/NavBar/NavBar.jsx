@@ -2,7 +2,7 @@ import React from "react";
 import "./NavBar.css";
 import { Link, NavLink } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ setToken, token }) => {
   return (
     <nav>
       <div className="nav-wrapper">
@@ -35,12 +35,16 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/login"
-              activeStyle={{ backgroundColor: "rgba(0,0,0,0.1)" }}
-            >
-              Login
-            </NavLink>
+            {token ? (
+              <a onClick={() => {setToken("")}}>Logout</a>
+            ) : (
+              <NavLink
+                to="/login"
+                activeStyle={{ backgroundColor: "rgba(0,0,0,0.1)" }}
+              >
+                Login
+              </NavLink>
+            )}
           </li>
         </ul>
       </div>

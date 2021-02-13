@@ -22,7 +22,7 @@ function App() {
     <div>
       <Router>
         <AlertContext.Provider value={{ ...alert, setAlert: setAlert }}>
-          <NavBar />
+          <NavBar token={token} setToken={setToken}/>
           <div className="row">
             <div className="col s12 alert">
               <p className="center-align">{alert.message}</p>
